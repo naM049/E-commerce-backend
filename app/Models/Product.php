@@ -16,6 +16,11 @@ class Product extends Model
         'category_id',
     ];
 
+    protected $casts = [
+        'price' => 'float',
+        'units_in_stock' => 'int'
+    ];
+
     public function category():BelongsTo
     {
         return $this->belongsTo(Category::class);
