@@ -12,7 +12,7 @@ class ProductRequest extends FormRequest
             'name' => ['required','max:255'],
             'description' => ['required'],
             'price' => ['required','numeric'],
-            'units_in_stock' => ['required','numeric'],
+            'units_in_stock' => ['required','numeric','integer'],
             'category_id' => ['required', 'numeric','exists:categories,id'],
         ];
     }

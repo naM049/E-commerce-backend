@@ -11,8 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('price');
-            $table->string('units_in_stock');
+            $table->decimal('price');
+            $table->integer('units_in_stock');
             $table->foreignId('category_id')->constrained('categories')->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

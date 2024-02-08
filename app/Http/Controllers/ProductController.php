@@ -28,7 +28,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'price' => ['numeric'],
-            'units_in_stock' => ['numeric'],
+            'units_in_stock' => ['numeric','integer'],
             'category_id' => ['numeric','exists:categories,id'],
         ]);
 

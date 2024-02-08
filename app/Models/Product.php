@@ -17,7 +17,6 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'price' => 'float',
         'units_in_stock' => 'int'
     ];
 
