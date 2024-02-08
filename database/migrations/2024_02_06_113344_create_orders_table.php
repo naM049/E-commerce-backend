@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('total');
+            $table->string('status');
             $table->foreignId('user_id')->constrained()->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
