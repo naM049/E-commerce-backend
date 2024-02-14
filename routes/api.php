@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RefreshTokenController;
 use App\Http\Controllers\RegisterController;
@@ -40,6 +42,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('products', ProductController::class)->missing(
         fn() => response()->json(['message' => 'Not Found'], 404)
     );
+    Route::apiResource('orders', OrderController::class)->missing(
+        fn() => response()->json(['message' => 'Not Found'], 404)
+    );
+    Route::apiResource('order-items', OrderItemController::class)->except('store')->missing(
+        fn() => response()->json(['message' => 'Not Found'], 404)
+    );
+
 
 });
 
