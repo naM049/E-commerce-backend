@@ -17,7 +17,8 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'units_in_stock' => 'int'
+        'units_in_stock' => 'int',
+        'price' => 'float',
     ];
 
     public function category():BelongsTo
