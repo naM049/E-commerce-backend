@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RefreshTokenController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPassword;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::group(['middleware' => 'guest'], function () {
 
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/register', [RegisterController::class, 'register']);
+    Route::post('/forgot-password', [ResetPassword::class, 'forgotPassword']);
+    Route::post('/reset-password', [ResetPassword::class, 'resetPassword']);
 
 });
 
