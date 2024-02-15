@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Http\Resources\OrderResource;
+use App\Mail\OrderCreatedMail;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
@@ -46,7 +48,7 @@ class OrderController extends Controller
                 OrderItemController::store($order, $order_item);
             }
 
-
+            Mail::to($order->user)->send(new OrderCreatedMail($order));
         });
 
         return new OrderResource(Order::where('user_id', $user)->with('orderItems')->latest()->first());
