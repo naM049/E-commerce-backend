@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RefreshTokenController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPassword;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::post('/refresh', [RefreshTokenController::class, 'refresh']);
 
+    Route::apiResource('users', UserController::class)->missing(
+        fn() => response()->json(['message' => 'Not Found'], 404)
+    );
+
     Route::apiResource('categories', CategoryController::class)->missing(
         fn() => response()->json(['message' => 'Not Found'], 404)
     );
@@ -51,6 +56,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('order-items', OrderItemController::class)->except('store')->missing(
         fn() => response()->json(['message' => 'Not Found'], 404)
     );
+
 
 
 });
