@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(OrderItem::class, 'order_item');
+    }
     public function index()
     {
         return OrderItemResource::collection(OrderItem::paginate());

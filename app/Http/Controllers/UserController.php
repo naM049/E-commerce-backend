@@ -23,13 +23,14 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['string', 'max:255'],
-            'email' => [ 'email', 'max:254'],
-            'birthday' => ['date'],
+            'email' => ['email', 'max:254'],
+            'birthday' => ['date', 'before:today'],
             'country' => ['string'],
             'city' => ['string'],
             'postcode' => ['string'],
             'address_line_1' => ['string'],
             'address_line_2' => ['nullable'],
+            'role' => ['string', 'in:admin,user']
         ]);
 
         $user->update([
@@ -37,6 +38,12 @@ class UserController extends Controller
             'email' => $request->email ?? $user->email,
             'birthday' => $request->birthday ?? $user->birthday,
         ]);
+
+        if (auth()->user()->role === 'admin') {
+            $user->role = $request->role ?? $user->role;
+            $user->save();
+        }
+
         $user->address()->update([
             'country' => $request->country ?? $user->address->country,
             'city' => $request->city ?? $user->address->city,
