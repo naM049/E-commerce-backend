@@ -21,7 +21,12 @@ class OrderController extends Controller
 
     public function index()
     {
-        return OrderResource::collection(Order::with('orderItems')->paginate());
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            return OrderResource::collection(Order::with('orderItems')->latest()->paginate());
+        } else {
+            return OrderResource::collection(Order::with('orderItems')->where('user_id', '==', $user->id)->paginate());
+        }
     }
 
     public function store(Request $request)

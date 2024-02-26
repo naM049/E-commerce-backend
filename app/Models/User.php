@@ -68,4 +68,9 @@ class User extends Authenticatable implements JWTSubject, CanResetPassword
     {
         return [];
     }
+
+    public function isAdmin():bool
+    {
+        return $this->role === 'admin';
+    }
 }
